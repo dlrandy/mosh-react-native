@@ -19,6 +19,9 @@ import AppText from "./app/components/AppText/AppText";
 import AppButton from "./app/components/AppButton/AppButton";
 import AppCard from "./app/components/AppCard/AppCard";
 import ListingDetailsScreen from "./app/screens/ListingDetails.screen";
+import MessagesScreen from "./app/screens/MessagesScreen";
+import AccountScreen from "./app/screens/AccountScreen";
+import ListingsScreen from "./app/screens/ListingsScreen";
 export default function App() {
   const dimensions = Dimensions.get("screen");
   console.log(dimensions);
@@ -27,7 +30,10 @@ export default function App() {
   const image = require("./app/assets/chair.jpg")
   return (
     <SafeAreaView style={[styles.container, containerStyle]}>
-      <ViewImageScreen></ViewImageScreen>
+      <ListingsScreen />
+      {/* <AccountScreen></AccountScreen> */}
+      {/* <MessagesScreen></MessagesScreen> */}
+      {/* <ViewImageScreen></ViewImageScreen> */}
       {/* <ListingDetailsScreen></ListingDetailsScreen> */}
       {/* <AppCard image={image}></AppCard> */}
       {/* <WelcomeScreen></WelcomeScreen> */}
