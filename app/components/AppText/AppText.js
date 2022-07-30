@@ -1,10 +1,10 @@
 import React from "react";
 import { Text, View } from "react-native";
-import styles from './styles';
+import defaultStyles from '../../config/styles';
 function AppText({ children, style }) {
   return (
-    <View>
-      <Text style={[styles.text,style]}>{children}</Text>
+    <View style={style}>
+      <Text style={[defaultStyles.text]}>{children}</Text>
     </View>
   );
 }

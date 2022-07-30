@@ -22,15 +22,32 @@ import ListingDetailsScreen from "./app/screens/ListingDetails.screen";
 import MessagesScreen from "./app/screens/MessagesScreen";
 import AccountScreen from "./app/screens/AccountScreen";
 import ListingsScreen from "./app/screens/ListingsScreen";
+import AppTextInput from "./app/components/AppTextInput/AppTextInput";
+import AppSwitch from './app/components/AppSwitch/AppSwitch';
+import { useState } from "react";
+import AppPicker from "./app/components/AppPicker/AppPicker";
+
+const categories = [
+  {label: "Furniture", value: 1,},
+  {label: "Clothing", value: 2,},
+  {label: "Cameras", value: 3,},
+];
+
 export default function App() {
   const dimensions = Dimensions.get("screen");
   console.log(dimensions);
   console.log(useDimensions());
   const { landscape } = useDeviceOrientation();
-  const image = require("./app/assets/chair.jpg")
+  const image = require("./app/assets/chair.jpg");
+
+  const [category, setCategory] = useState(categories[0]);
   return (
     <SafeAreaView style={[styles.container, containerStyle]}>
-      <ListingsScreen />
+      <AppPicker selectedItem={category} onSelectItem={item=> setCategory(item)} items={categories} icon={"apps"} placeholder={"Category"} />
+      <AppTextInput icon="email" placeholder="Email"/>
+      {/* <AppSwitch value={false} handleValueChange={(v)=>alert(v)} /> */}
+      {/* <AppTextInput placeholder="user name" icon="email" /> */}
+      {/* <ListingsScreen /> */}
       {/* <AccountScreen></AccountScreen> */}
       {/* <MessagesScreen></MessagesScreen> */}
       {/* <ViewImageScreen></ViewImageScreen> */}
