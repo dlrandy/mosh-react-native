@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 // create a component
-const Icon = ({name, size = 40, backgroundColor = '#000', iconColor='#ff'}) => {
+const Icon = ({name, size = 40, backgroundColor = '#000', iconColor='#fff'}) => {
     return (
         <View style={{
             width: size, 

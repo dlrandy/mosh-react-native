@@ -9,11 +9,12 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 
 // create a component
-const AppFormField = ({name, ...otherProps}) => {
+const AppFormField = ({name, width, ...otherProps}) => {
    const {setFieldTouched, handleChange, errors, touched} =  useFormikContext();
   return (
     <>
       <AppTextInput
+        width={width}
         onBlur={() => setFieldTouched(name)}
         onChangeText={handleChange(name)}
          {...otherProps}
