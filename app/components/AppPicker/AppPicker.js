@@ -17,6 +17,7 @@ import AppText from "../AppText/AppText";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import Screen from "../Screen/Screen";
 import PickerItem from "./PickerItem";
+import colors from "../../config/colors";
 // create a component
 const AppPicker = ({
   icon,
@@ -38,10 +39,11 @@ const AppPicker = ({
               color={defaultStyles.colors.medium}
             />
           )}
-          <AppText style={styles.text}>
-            {" "}
-            {selectedItem ? selectedItem.label : placeholder}
-          </AppText>
+          {selectedItem ? (
+            <AppText style={styles.text}>{selectedItem.label}</AppText>
+          ) : (
+            <AppText style={styles.placeholder}>{placeholder}</AppText>
+          )}
           <MaterialCommunityIcons
             name="chevron-down"
             size={20}
@@ -87,6 +89,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: defaultStyles.colors.dark,
     fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
+    flex: 1,
+  },
+  placeholder:{
+    color: defaultStyles.colors.medium,
     flex: 1,
   },
   icon: {

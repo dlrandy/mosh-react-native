@@ -11,7 +11,7 @@ const AppTextInput = ({ icon, ...otherProps }) => {
       {icon && (
         <MaterialCommunityIcons name={icon} size={20} style={styles.icon} color={defaultStyles.colors.medium} />
       )}
-      <TextInput style={defaultStyles.text} {...otherProps} />
+      <TextInput placeholderTextColor={defaultStyles.colors.medium} style={defaultStyles.text} {...otherProps} />
     </View>
   );
 };
@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
   textInput: {
     fontSize: 18,
     color: defaultStyles.colors.dark,
+    width: '100%',
     fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
   },
   icon:{

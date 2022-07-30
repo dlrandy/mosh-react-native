@@ -26,6 +26,8 @@ import AppTextInput from "./app/components/AppTextInput/AppTextInput";
 import AppSwitch from './app/components/AppSwitch/AppSwitch';
 import { useState } from "react";
 import AppPicker from "./app/components/AppPicker/AppPicker";
+import LoginScreen from "./app/screens/LoginScreen";
+import ListingEditScreen from "./app/screens/ListingEditScreen";
 
 const categories = [
   {label: "Furniture", value: 1,},
@@ -43,8 +45,10 @@ export default function App() {
   const [category, setCategory] = useState(categories[0]);
   return (
     <SafeAreaView style={[styles.container, containerStyle]}>
-      <AppPicker selectedItem={category} onSelectItem={item=> setCategory(item)} items={categories} icon={"apps"} placeholder={"Category"} />
-      <AppTextInput icon="email" placeholder="Email"/>
+     <ListingEditScreen />
+     {/* <LoginScreen /> */}
+      {/* <AppPicker selectedItem={category} onSelectItem={item=> setCategory(item)} items={categories} icon={"apps"} placeholder={"Category"} />
+       <AppTextInput icon="email" placeholder="Email"/> */}
       {/* <AppSwitch value={false} handleValueChange={(v)=>alert(v)} /> */}
       {/* <AppTextInput placeholder="user name" icon="email" /> */}
       {/* <ListingsScreen /> */}

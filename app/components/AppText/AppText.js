@@ -4,7 +4,7 @@ import defaultStyles from '../../config/styles';
 function AppText({ children, style }) {
   return (
     <View style={style}>
-      <Text style={[defaultStyles.text]}>{children}</Text>
+      <Text style={[defaultStyles.text, style]}>{children}</Text>
     </View>
   );
 }
