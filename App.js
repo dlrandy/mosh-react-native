@@ -28,6 +28,7 @@ import { useState } from "react";
 import AppPicker from "./app/components/AppPicker/AppPicker";
 import LoginScreen from "./app/screens/LoginScreen";
 import ListingEditScreen from "./app/screens/ListingEditScreen";
+import NativeFeaturesScreen from "./app/screens/NativeFeaturesScreen";
 
 const categories = [
   {label: "Furniture", value: 1,},
@@ -45,6 +46,7 @@ export default function App() {
   const [category, setCategory] = useState(categories[0]);
   return (
     <SafeAreaView style={[styles.container, containerStyle]}>
+      {/* <NativeFeaturesScreen></NativeFeaturesScreen> */}
      <ListingEditScreen />
      {/* <LoginScreen /> */}
       {/* <AppPicker selectedItem={category} onSelectItem={item=> setCategory(item)} items={categories} icon={"apps"} placeholder={"Category"} />
