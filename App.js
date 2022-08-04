@@ -8,7 +8,8 @@ import {
   SafeAreaView,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
+import { NavigationContainer } from "@react-navigation/native";
+import navigationTheme from './app/navigation/navigationTheme';
 import {
   useDimensions,
   useDeviceOrientation,
@@ -20,20 +21,23 @@ import AppButton from "./app/components/AppButton/AppButton";
 import AppCard from "./app/components/AppCard/AppCard";
 import ListingDetailsScreen from "./app/screens/ListingDetails.screen";
 import MessagesScreen from "./app/screens/MessagesScreen";
+import StackNavigatorScreen from "./app/screens/StackNavigatorScreen";
 import AccountScreen from "./app/screens/AccountScreen";
 import ListingsScreen from "./app/screens/ListingsScreen";
 import AppTextInput from "./app/components/AppTextInput/AppTextInput";
-import AppSwitch from './app/components/AppSwitch/AppSwitch';
+import AppSwitch from "./app/components/AppSwitch/AppSwitch";
 import { useState } from "react";
 import AppPicker from "./app/components/AppPicker/AppPicker";
 import LoginScreen from "./app/screens/LoginScreen";
 import ListingEditScreen from "./app/screens/ListingEditScreen";
 import NativeFeaturesScreen from "./app/screens/NativeFeaturesScreen";
+import AuthNavigator from "./app/navigation/AuthNavigator";
+import AppNavigator from "./app/navigation/AppNavigator";
 
 const categories = [
-  {label: "Furniture", value: 1,},
-  {label: "Clothing", value: 2,},
-  {label: "Cameras", value: 3,},
+  { label: "Furniture", value: 1 },
+  { label: "Clothing", value: 2 },
+  { label: "Cameras", value: 3 },
 ];
 
 export default function App() {
@@ -46,9 +50,14 @@ export default function App() {
   const [category, setCategory] = useState(categories[0]);
   return (
     <SafeAreaView style={[styles.container, containerStyle]}>
+      <NavigationContainer theme={navigationTheme}>
+        {/* <AuthNavigator /> */}
+        <AppNavigator />
+      </NavigationContainer>
+      {/* <StackNavigatorScreen /> */}
       {/* <NativeFeaturesScreen></NativeFeaturesScreen> */}
-     <ListingEditScreen />
-     {/* <LoginScreen /> */}
+      {/* <ListingEditScreen /> */}
+      {/* <LoginScreen /> */}
       {/* <AppPicker selectedItem={category} onSelectItem={item=> setCategory(item)} items={categories} icon={"apps"} placeholder={"Category"} />
        <AppTextInput icon="email" placeholder="Email"/> */}
       {/* <AppSwitch value={false} handleValueChange={(v)=>alert(v)} /> */}

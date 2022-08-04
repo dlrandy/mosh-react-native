@@ -21,6 +21,7 @@ const menuItems = [
       name: "email",
       backgroundColor: colors.secondary,
     },
+    targetScreen: "Messages",
   },
   {
     title: "My Listinges",
@@ -31,7 +32,7 @@ const menuItems = [
   },
 ];
 // create a component
-const MessagesScreen = () => {
+const AccountScreen = ({ navigation }) => {
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
@@ -49,23 +50,29 @@ const MessagesScreen = () => {
         ></ListItem>
       </View>
       <View style={styles.container}>
-          <FlatList
-           data={menuItems}
-           keyExtractor={menuItem => menuItem.title}
-           ItemSeparatorComponent={ListItemSeparator}
-           renderItem={({item})=>{
-            return <ListItem title={item.title} IconComponent={
-              <Icon name={item.icon.name} backgroundColor={item.icon.backgroundColor} />
-            } />
-           }}
-          />
-
+        <FlatList
+          data={menuItems}
+          keyExtractor={(menuItem) => menuItem.title}
+          ItemSeparatorComponent={ListItemSeparator}
+          renderItem={({ item }) => {
+            return (
+              <ListItem
+                title={item.title}
+                onPress={()=> navigation.navigate(item.targetScreen)}
+                IconComponent={
+                  <Icon
+                    name={item.icon.name}
+                    backgroundColor={item.icon.backgroundColor}
+                  />
+                }
+              />
+            );
+          }}
+        />
       </View>
-      <ListItem 
-      title={"Log Out"}
-      IconComponent={
-        <Icon name="logout" backgroundColor="#ffe66d"/>
-      }
+      <ListItem
+        title={"Log Out"}
+        IconComponent={<Icon name="logout" backgroundColor="#ffe66d" />}
       />
     </Screen>
   );
@@ -73,7 +80,7 @@ const MessagesScreen = () => {
 
 // define your styles
 const styles = StyleSheet.create({
-  screen:{
+  screen: {
     backgroundColor: colors.light,
   },
   container: {
@@ -82,4 +89,4 @@ const styles = StyleSheet.create({
 });
 
 //make this component available to the app
-export default MessagesScreen;
+export default AccountScreen;
