@@ -1,16 +1,18 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import AppText from '../AppText/AppText';
 import Icon from '../Icon/Icon';
 
 // create a component
 const CategoryPickerItem = ({ onPress, item,}) => {
     return (
+        <TouchableWithoutFeedback onPress={()=>onPress()}>
         <View style={styles.container}>
             <Icon backgroundColor={item.backgroundColor} name={item.icon} size={70} />
             <AppText style={styles.label}>{item.label}</AppText>
         </View>
+        </TouchableWithoutFeedback>
     );
 };
 

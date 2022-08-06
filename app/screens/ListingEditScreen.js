@@ -1,5 +1,5 @@
 //import liraries
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Image } from "react-native";
 
 import * as Yup from "yup";
@@ -14,7 +14,8 @@ import {
 } from "../components/Forms";
 import FormImagePicker from "../components/Forms/AppFormImagePicker/AppFormImagePicker";
 import { useLocation } from "../hooks/useLocation";
-
+import {addListing} from '../api/listings';
+import UploadScreen from "./UploadScreen";
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
   price: Yup.string().required().min(1).max(10000).label("Price"),
@@ -33,11 +34,26 @@ const categories = [
 
 // create a component
 const ListingEditScreen = () => {
-  const location = useLocation();
+  const [location] = useLocation();
+  const [uploadVisible, setUploadVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const handleSubmit = async (listing, {resetForm})=>{
+    setProgress(0);
+    setUploadVisible(true);
+    const res = await addListing({...listing, location}, progress=>setProgress(progress))
+    setUploadVisible(false);
+    if (!res.ok) {
+      setUploadVisible(false);
+      return alert('Could not save the listing.');
+    }
+    resetForm();
+  }
+
   return (
     <Screen>
-      <Image style={styles.logo} source={require("../assets/logo-red.png")} />
 
+      <Image style={styles.logo} source={require("../assets/logo-red.png")} />
+     <UploadScreen onDone={()=> setTimeout(()=>setUploadVisible(false))} progress={progress} visible={uploadVisible} />
       <AppForm
         validationSchema={validationSchema}
         initialValues={{
@@ -47,7 +63,7 @@ const ListingEditScreen = () => {
           category: null,
           images: [],
         }}
-        onSubmit={(values) => console.log(values, location)}
+        onSubmit={handleSubmit}
       >
         <>
           <FormImagePicker name="images" />
@@ -77,7 +93,7 @@ const ListingEditScreen = () => {
             name="description"
             placeholder="Description"
           />
-          <SubmitButton title={"Login"} />
+          <SubmitButton title={"Post"} />
         </>
       </AppForm>
     </Screen>

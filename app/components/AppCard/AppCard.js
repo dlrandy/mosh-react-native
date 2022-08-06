@@ -8,13 +8,13 @@ import styles from "./styles";
 const AppCard = ({
   title = "Red jacket for sale",
   subTitle = "$100",
-  image,
+  imageUrl,
   onPress
 }) => {
   return (
     <TouchableWithoutFeedback onPress={onPress} >
     <View style={styles.card}>
-      <Image style={styles.image} source={image} />
+      <Image style={styles.image} source={{uri:imageUrl}} />
       <View style={styles.detailContainer}>
         <AppText style={styles.title}>{title}</AppText>
         <AppText style={styles.subTitle}>{subTitle}</AppText>
