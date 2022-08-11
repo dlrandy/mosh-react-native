@@ -14,6 +14,7 @@ import {
   useDimensions,
   useDeviceOrientation,
 } from "@react-native-community/hooks";
+
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
 import AppText from "./app/components/AppText/AppText";
@@ -26,14 +27,15 @@ import AccountScreen from "./app/screens/AccountScreen";
 import ListingsScreen from "./app/screens/ListingsScreen";
 import AppTextInput from "./app/components/AppTextInput/AppTextInput";
 import AppSwitch from "./app/components/AppSwitch/AppSwitch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AppPicker from "./app/components/AppPicker/AppPicker";
 import LoginScreen from "./app/screens/LoginScreen";
 import ListingEditScreen from "./app/screens/ListingEditScreen";
 import NativeFeaturesScreen from "./app/screens/NativeFeaturesScreen";
 import AuthNavigator from "./app/navigation/AuthNavigator";
 import AppNavigator from "./app/navigation/AppNavigator";
-
+import NetInfo, {useNetInfo} from '@react-native-community/netinfo';
+import OfflineNotice from "./app/components/OfflineNotice/OfflineNotice";
 const categories = [
   { label: "Furniture", value: 1 },
   { label: "Clothing", value: 2 },
@@ -48,8 +50,19 @@ export default function App() {
   const image = require("./app/assets/chair.jpg");
 
   const [category, setCategory] = useState(categories[0]);
+
+  // NetInfo.fetch().then(netInfo => console.log(netInfo));
+  // useEffect(()=>{
+  // const unlisten = NetInfo.addEventListener(netInfo=>console.log(netInfo))
+  // return ()=>unlisten();
+  // }, []);
+  // const netInfo = useNetInfo();
+  // return netInfo.isInternetReachable ? <View><Text>Noraml</Text></View> : <View><Text>abnormal</Text></View>
+
+ 
   return (
     <SafeAreaView style={[styles.container, containerStyle]}>
+      <OfflineNotice />
       <NavigationContainer theme={navigationTheme}>
         {/* <AuthNavigator /> */}
         <AppNavigator />

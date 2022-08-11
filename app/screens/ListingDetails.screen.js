@@ -1,6 +1,7 @@
 //import liraries
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import {Image} from "react-native-expo-image-cache";
 import AppText from "../components/AppText/AppText";
 import colors from "../config/colors";
 import ListItem from '../components/ListItem/ListItem';
@@ -9,7 +10,7 @@ const ListingDetailsScreen = ({route}) => {
   const listing = route.params;
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={listing.image} />
+      <Image style={styles.image} preview={{uri: listing.images[0].thumbnailUrl}} uri={listing.images[0].url} />
       <View style={styles.detailsContainer}>
         <AppText style={styles.titile}>{listing.title}</AppText>
         <AppText style={styles.price}>${listing.price}</AppText>

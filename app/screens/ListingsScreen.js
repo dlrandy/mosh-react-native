@@ -34,6 +34,7 @@ const ListingsScreen = ({navigation}) => {
       keyExtractor={listing => listing.id}
       renderItem={({item})=><AppCard onPress={()=> navigation.navigate(routes.LISTING_DETAILS,item)} title={item.title} subTitle={'$' + item.price} 
       imageUrl={item.images[0].url}
+      thumbnailUrl={item.images[0].thumbnailUrl}
       />}
       />
     </Screen>
