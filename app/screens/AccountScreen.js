@@ -1,6 +1,9 @@
 //import liraries
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, FlatList, View } from "react-native";
+import AuthContext from "../auth/context";
+import authStorage from "../auth/storage";
+import useAuth from "../auth/useAuth";
 import Icon from "../components/Icon/Icon";
 import ListItem from "../components/ListItem/ListItem";
 import ListItemSeparator from "../components/ListItemSeparator/ListItemSeparator";
@@ -33,12 +36,16 @@ const menuItems = [
 ];
 // create a component
 const AccountScreen = ({ navigation }) => {
+  const {user, logOut} = useAuth();
+  const handleLogout = ()=>logOut();
+  
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
         <ListItem
-          title={"Mosh"}
-          subTitle={"dfddf@gmail.com"}
+          title={user.name}
+          subTitle={user.email}
+          image={require('../assets/chair.jpg')}
           ImageComponent={
             <Icon
               name="email"
@@ -73,6 +80,7 @@ const AccountScreen = ({ navigation }) => {
       <ListItem
         title={"Log Out"}
         IconComponent={<Icon name="logout" backgroundColor="#ffe66d" />}
+        onPress={handleLogout}
       />
     </Screen>
   );

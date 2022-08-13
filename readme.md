@@ -12,5 +12,13 @@
 
 对于复杂项目可以使用实时数据库或者cloud（realme）
 
+Authentication providers
+1. Amplify by amazon
+2. Firebase by google
+3. Auth0
 
+react context
+适合共享一些不常改变的小对象；
 
+redux
+适合共享一些经常改变的大对象；

@@ -1,13 +1,13 @@
+import { useCallback } from 'react';
 import {
   StyleSheet,
   Platform,
   StatusBar,
   Dimensions,
-  View,
-  Text,
+
   SafeAreaView,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 import { NavigationContainer } from "@react-navigation/native";
 import navigationTheme from './app/navigation/navigationTheme';
 import {
@@ -15,33 +15,22 @@ import {
   useDeviceOrientation,
 } from "@react-native-community/hooks";
 
-import WelcomeScreen from "./app/screens/WelcomeScreen";
-import ViewImageScreen from "./app/screens/ViewImageScreen";
-import AppText from "./app/components/AppText/AppText";
-import AppButton from "./app/components/AppButton/AppButton";
-import AppCard from "./app/components/AppCard/AppCard";
-import ListingDetailsScreen from "./app/screens/ListingDetails.screen";
-import MessagesScreen from "./app/screens/MessagesScreen";
-import StackNavigatorScreen from "./app/screens/StackNavigatorScreen";
-import AccountScreen from "./app/screens/AccountScreen";
-import ListingsScreen from "./app/screens/ListingsScreen";
-import AppTextInput from "./app/components/AppTextInput/AppTextInput";
-import AppSwitch from "./app/components/AppSwitch/AppSwitch";
+import * as SplashScreen from 'expo-splash-screen';
+
 import { useEffect, useState } from "react";
-import AppPicker from "./app/components/AppPicker/AppPicker";
-import LoginScreen from "./app/screens/LoginScreen";
-import ListingEditScreen from "./app/screens/ListingEditScreen";
-import NativeFeaturesScreen from "./app/screens/NativeFeaturesScreen";
 import AuthNavigator from "./app/navigation/AuthNavigator";
 import AppNavigator from "./app/navigation/AppNavigator";
-import NetInfo, {useNetInfo} from '@react-native-community/netinfo';
 import OfflineNotice from "./app/components/OfflineNotice/OfflineNotice";
+import AuthContext from "./app/auth/context";
+import authStorage from './app/auth/storage';
+
 const categories = [
   { label: "Furniture", value: 1 },
   { label: "Clothing", value: 2 },
   { label: "Cameras", value: 3 },
 ];
 
+SplashScreen.preventAutoHideAsync();
 export default function App() {
   const dimensions = Dimensions.get("screen");
   console.log(dimensions);
@@ -58,14 +47,48 @@ export default function App() {
   // }, []);
   // const netInfo = useNetInfo();
   // return netInfo.isInternetReachable ? <View><Text>Noraml</Text></View> : <View><Text>abnormal</Text></View>
+  const [user, setUser] = useState();
+  const [appIsReady, setAppIsReady] = useState(false);
+  const restoreUser = async () => {
+    try {
+      const user = await  authStorage.getUser();
+      if (!user) {
+        return;
+      }
+      setUser(user);      
+    } catch (error) {
+      console.log(error);
+    } finally{
+      setAppIsReady(true);
+    }
 
+  }
+  useEffect(()=>{
+    restoreUser();
+  },[]);
  
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      // This tells the splash screen to hide immediately! If we call this after
+      // `setAppIsReady`, then we may see a blank screen while the app is
+      // loading its initial state and rendering its first pixels. So instead,
+      // we hide the splash screen once we know the root view has already
+      // performed layout.
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null;
+  }
+
   return (
-    <SafeAreaView style={[styles.container, containerStyle]}>
+    <SafeAreaView style={[styles.container, containerStyle]} >
+      <AuthContext.Provider value={{setUser,user}}>
       <OfflineNotice />
-      <NavigationContainer theme={navigationTheme}>
-        {/* <AuthNavigator /> */}
-        <AppNavigator />
+      <NavigationContainer onReady={onLayoutRootView} theme={navigationTheme}>
+       {user ? <AppNavigator /> : <AuthNavigator />}
+
       </NavigationContainer>
       {/* <StackNavigatorScreen /> */}
       {/* <NativeFeaturesScreen></NativeFeaturesScreen> */}
@@ -137,6 +160,7 @@ export default function App() {
           margin: 20,
         }}
       ></View> */}
+      </AuthContext.Provider>
     </SafeAreaView>
   );
 }

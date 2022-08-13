@@ -1,5 +1,5 @@
 //import liraries
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Image } from "react-native";
 
 import * as Yup from "yup";
@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import Screen from "../components/Screen/Screen";
 
 import { AppFormField, SubmitButton, AppForm } from "../components/Forms";
+import auth from "../../Backend/middleware/auth";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -15,6 +16,20 @@ const validationSchema = Yup.object().shape({
 
 // create a component
 const RegisterScreen = () => {
+  const [error, setError] = useState(null);
+  const handleSubmit = async (userInfo) => {
+    const result = await usrApi.register(userInfo);
+    if (!result.ok) {
+      if (result.data) {
+        setError(result.data.error)
+      } else {
+        setError('An unexpected error occurred.');
+        
+      }
+    }
+    const { data: authToken} = await authApi.login(userInfo.email, userInfo.password);
+    auth.login(authToken);
+  }
   return (
     <Screen>
       <Image style={styles.logo} source={require("../assets/logo-red.png")} />
@@ -22,7 +37,7 @@ const RegisterScreen = () => {
       <AppForm
         validationSchema={validationSchema}
         initialValues={{ email: "", password: "" }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={handleSubmit}
       >
         <>
           <AppFormField
