@@ -1,6 +1,7 @@
 //import liraries
 import React, { Component, useEffect, useState } from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList, Button } from "react-native";
+import * as Notifications from 'expo-notifications';
 import AppCard from "../components/AppCard/AppCard";
 import Screen from "../components/Screen/Screen";
 import colors from "../config/colors";
@@ -21,6 +22,17 @@ const ListingsScreen = ({navigation}) => {
   useEffect(()=>{
     loadListings();
  }, []);
+ const showNotification = () => {
+  Notifications.scheduleNotificationAsync({
+    content: {
+      title: "Time's up!",
+      body: 'Change sides!',
+    },
+    trigger: {
+      seconds: 10,
+    },  });
+
+ }
   return (
     <>
       <ActivityIndicator visible={loading} />
@@ -31,6 +43,7 @@ const ListingsScreen = ({navigation}) => {
         <AppButton title="Retry" onPress={loadListings}></AppButton>
         </>
       }
+      <Button title="Tap me" onPress={showNotification} />
       <FlatList data={listings} 
       keyExtractor={listing => listing.id}
       renderItem={({item})=><AppCard onPress={()=> navigation.navigate(routes.LISTING_DETAILS,item)} title={item.title} subTitle={'$' + item.price} 

@@ -1,16 +1,22 @@
 //import liraries
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { Button, View, Text, StyleSheet } from "react-native";
 import Screen from "../components/Screen/Screen";
  
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+
  
 import ListingsScreen from "../screens/ListingsScreen";
 import ListingEditScreen from "../screens/ListingEditScreen";
 import FeedNavigator from "./FeedNavigator";
 import AccountNavigator from "./AccountNavigator";
 import NewListingButton from "./NewListingButton";
+import useNotification from "../hooks/useNotification";
+import rootNavigation from "./rootNavigation";
+console.log(useNotification,'--');
+
+
 
 const Tab = createBottomTabNavigator();
 
@@ -22,6 +28,10 @@ const AccountScreen = () => (
  
 // create a component
 const AppNavigator = () => {
+
+  useNotification(navigation =>{
+    rootNavigation.navigate('Account')
+  });
   return (
     <Tab.Navigator
       

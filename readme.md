@@ -22,3 +22,15 @@ react context
 
 redux
 适合共享一些经常改变的大对象；
+
+push notification providers
+1. expo push notification service
+2. one signal
+3. firebase cloud MESSING
+4. Amazon simple notification service(sns)
+
+expo push notification:
+1. register the app to get a token
+2. store token on the server
+3. send a notification
+4. handle received notification

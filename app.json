@@ -11,6 +11,9 @@
       "resizeMode": "cover",
       "backgroundColor": "#e63c4b"
     },
+    "notification":{
+      "iosDisplayInForeground": true
+    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -29,6 +32,19 @@
     "web": {
       "favicon": "./app/assets/favicon.png"
     },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./app/assets/logo-red.png",
+          "color": "#CA2C92",
+          "sounds": [],
+          "androidMode": "default",
+          "androidCollapsedTitle": "DownWithIt",
+          "iosDisplayInForeground": true
+        }
+      ]
+    ],
     "description": ""
   }
 }

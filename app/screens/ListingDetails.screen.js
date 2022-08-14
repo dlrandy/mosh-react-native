@@ -1,15 +1,19 @@
 //import liraries
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
 import {Image} from "react-native-expo-image-cache";
 import AppText from "../components/AppText/AppText";
 import colors from "../config/colors";
 import ListItem from '../components/ListItem/ListItem';
+import ContactSellerForm from "../components/ContactSellerForm/ContactSellerForm";
 // create a component
 const ListingDetailsScreen = ({route}) => {
   const listing = route.params;
   return (
-    <View style={styles.container}>
+    
+    <KeyboardAvoidingView behavior="position"
+      keyboardVerticalOffset={Platform.OS === 'IOS' ? 0 : 100}
+    > 
       <Image style={styles.image} preview={{uri: listing.images[0].thumbnailUrl}} uri={listing.images[0].url} />
       <View style={styles.detailsContainer}>
         <AppText style={styles.titile}>{listing.title}</AppText>
@@ -18,8 +22,10 @@ const ListingDetailsScreen = ({route}) => {
 
         <ListItem image={require("../assets/logo-red.png")} title="mosh long long long long longggggggggggggggggggggggggggggggggggggg longgggg" subTitle="7 listings"/>
         </View>
+        <ContactSellerForm listing={listing} />
       </View>
-    </View>
+      
+    </KeyboardAvoidingView>
   );
 };
 

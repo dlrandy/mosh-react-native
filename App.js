@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 import {
   StyleSheet,
   Platform,
@@ -23,6 +23,7 @@ import AppNavigator from "./app/navigation/AppNavigator";
 import OfflineNotice from "./app/components/OfflineNotice/OfflineNotice";
 import AuthContext from "./app/auth/context";
 import authStorage from './app/auth/storage';
+import {navigationRef} from './app/navigation/rootNavigation';
 
 const categories = [
   { label: "Furniture", value: 1 },
@@ -81,11 +82,12 @@ export default function App() {
   if (!appIsReady) {
     return null;
   }
+ 
 
   return (
     <SafeAreaView style={[styles.container, containerStyle]} >
       <AuthContext.Provider value={{setUser,user}}>
-      <NavigationContainer onReady={onLayoutRootView} theme={navigationTheme}>
+      <NavigationContainer ref={navigationRef} onReady={onLayoutRootView} theme={navigationTheme}>
        {user ? <AppNavigator /> : <AuthNavigator />}
       <OfflineNotice />
 
