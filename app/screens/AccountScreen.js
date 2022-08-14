@@ -37,7 +37,7 @@ const menuItems = [
 // create a component
 const AccountScreen = ({ navigation }) => {
   const {user, logOut} = useAuth();
-  const handleLogout = ()=>logOut();
+  const handleLogout = async()=> await logOut();
   
   return (
     <Screen style={styles.screen}>

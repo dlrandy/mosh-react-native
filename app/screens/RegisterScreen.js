@@ -8,7 +8,10 @@ import Screen from "../components/Screen/Screen";
 import ErrorMessage from '../components/Forms/ErrorMessage/ErrorMessage';
 import { AppFormField, SubmitButton, AppForm } from "../components/Forms";
 import usersApi from "../api/users";
+import authApi from "../api/auth";
 import useAuth from "../auth/useAuth";
+import useApi from "../hooks/useApi";
+import ActivityIndicator from "../components/ActivityIndicator/ActivityIndicator";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -18,9 +21,13 @@ const validationSchema = Yup.object().shape({
 // create a component
 const RegisterScreen = () => {
   const [error, setError] = useState(null);
-  const auth = useAuth();
+ const auth = useAuth();
+  const registerApi = useApi(usersApi.register);
+  const loginApi = useApi(authApi.login);
   const handleSubmit = async (userInfo) => {
-    const result = await usersApi.register(userInfo);
+
+    const result = await registerApi.request(userInfo);
+    console.log(result)
     if (!result.ok) {
       if (result.data) {
         setError(result.data.error)
@@ -28,21 +35,36 @@ const RegisterScreen = () => {
         setError('An unexpected error occurred.');
         
       }
+      return ;
     }
-    const { data: authToken} = await authApi.login(userInfo.email, userInfo.password);
-    auth.login(authToken);
+    try {
+      const res = await loginApi.request(userInfo.email, userInfo.password);
+      console.log(res,'--');
+      auth.login(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+
   }
   return (
     <Screen>
+      <ActivityIndicator visible={registerApi.loading || loginApi.loading} />
       <Image style={styles.logo} source={require("../assets/logo-red.png")} />
 
       <ErrorMessage error={error} visible={!!error} /> 
       <AppForm
         validationSchema={validationSchema}
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ name: "",email: "", password: "" }}
         onSubmit={handleSubmit}
       >
         <>
+          <AppFormField
+            icon="account"
+            autoCorrect={false}
+            autoCapitalize="none"
+            placeholder="Name"
+            name="name"
+          />
           <AppFormField
             icon="email"
             textContentType="emailAddress"

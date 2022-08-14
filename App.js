@@ -85,9 +85,9 @@ export default function App() {
   return (
     <SafeAreaView style={[styles.container, containerStyle]} >
       <AuthContext.Provider value={{setUser,user}}>
-      <OfflineNotice />
       <NavigationContainer onReady={onLayoutRootView} theme={navigationTheme}>
        {user ? <AppNavigator /> : <AuthNavigator />}
+      <OfflineNotice />
 
       </NavigationContainer>
       {/* <StackNavigatorScreen /> */}

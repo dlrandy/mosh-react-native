@@ -10,10 +10,12 @@ const ActivityIndicator = ({visible = false, }) => {
         return null;
     }
     return (
+        <View style={styles.overlay}>
        <LottieView 
         autoPlay
         loop
         source={require('../../assets/animations/loader.json')} />
+        </View>
     );
 };
 
@@ -24,6 +26,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#2c3e50',
+    },
+    overlay:{
+        backgroundColor: 'black',
+        height: '100%',
+        opacity: 0.7,
+        position: 'absolute',
+        width: '100%',
+        zIndex: 1
     },
 });
 

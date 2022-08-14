@@ -3187,13 +3187,6 @@ expo-image-picker@~13.1.1:
     expo-image-loader "~3.2.0"
     uuid "7.0.2"
 
-expo-jwt@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.npmmirror.com/expo-jwt/-/expo-jwt-1.4.1.tgz#2b9549d1f2a37148f01686f6eed9ba115e71409b"
-  integrity sha512-rjtJrizPNLnPxnTq8WPYIUJEM2VvXGZaNuA8mALqLywQd07/a9bTTmLI1PXz52nuc/yJgpXE+ZLICpjt/SFPgw==
-  dependencies:
-    crypto-js "^3.1.9-1"
-
 expo-keep-awake@~10.1.1:
   version "10.1.1"
   resolved "https://registry.npmmirror.com/expo-keep-awake/-/expo-keep-awake-10.1.1.tgz#03023c130f7e3824b738e3fdd5353b8a2c0c1980"
@@ -4383,6 +4376,11 @@ jsonify@~0.0.0:
   version "0.0.0"
   resolved "https://registry.npmmirror.com/jsonify/-/jsonify-0.0.0.tgz#2c74b6ee41d93ca51b7b5aaee8f503631d252a73"
   integrity sha512-trvBk1ki43VZptdBI5rIlG4YOzyeH/WefQt5rj1grasPn4iiZWKet8nkgc4GlsAylaztn0qZfUYOiTsASJFdNA==
+
+jwt-decode@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.npmmirror.com/jwt-decode/-/jwt-decode-3.1.2.tgz#3fb319f3675a2df0c2895c8f5e9fa4b67b04ed59"
+  integrity sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==
 
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   version "3.2.2"

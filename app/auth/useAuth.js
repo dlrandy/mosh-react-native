@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import JWT from 'expo-jwt';
+import jwtDecode from 'jwt-decode';
  
 
 import AuthContext from "./context";
@@ -7,13 +7,13 @@ import authStorage from "./storage";
 
 const useAuth = () => {
    const {user, setUser} = useContext(AuthContext);
-   const login = (authToken) => {
-    setUser(JWT.decode(authToken, 'jwtPrivateKey'));
-    authStorage.storeToken(authToken);
+   const login = async(authToken) => {
+    setUser(jwtDecode(authToken));
+    await authStorage.storeToken(authToken);
    }
-   const logOut = () => {
+   const logOut = async() => {
     setUser(null);
-    authStorage.removeToken();
+    await authStorage.removeToken();
    }
    return {login, logOut, user,};
 }

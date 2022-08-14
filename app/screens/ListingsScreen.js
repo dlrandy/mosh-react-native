@@ -22,6 +22,8 @@ const ListingsScreen = ({navigation}) => {
     loadListings();
  }, []);
   return (
+    <>
+      <ActivityIndicator visible={loading} />
     <Screen style={styles.screen}>
       {
         error &&<>
@@ -29,7 +31,6 @@ const ListingsScreen = ({navigation}) => {
         <AppButton title="Retry" onPress={loadListings}></AppButton>
         </>
       }
-        <ActivityIndicator visible={loading} />
       <FlatList data={listings} 
       keyExtractor={listing => listing.id}
       renderItem={({item})=><AppCard onPress={()=> navigation.navigate(routes.LISTING_DETAILS,item)} title={item.title} subTitle={'$' + item.price} 
@@ -38,6 +39,7 @@ const ListingsScreen = ({navigation}) => {
       />}
       />
     </Screen>
+    </>
   );
 };
 

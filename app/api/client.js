@@ -4,7 +4,7 @@ import authStorage from '../auth/storage';
 import cache from '../utility/cache';
 // define the api
 const apiClient = create({
-  baseURL: 'http://192.168.0.102:9000/api',
+  baseURL: 'http://192.168.0.101:9000/api',
 //   headers: { Accept: 'application/vnd.github.v3+json' },
 })
 
