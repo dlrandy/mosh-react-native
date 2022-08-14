@@ -5,9 +5,10 @@ import { StyleSheet, Image } from "react-native";
 import * as Yup from "yup";
 
 import Screen from "../components/Screen/Screen";
-
+import ErrorMessage from '../components/Forms/ErrorMessage/ErrorMessage';
 import { AppFormField, SubmitButton, AppForm } from "../components/Forms";
-import auth from "../../Backend/middleware/auth";
+import usersApi from "../api/users";
+import useAuth from "../auth/useAuth";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -17,8 +18,9 @@ const validationSchema = Yup.object().shape({
 // create a component
 const RegisterScreen = () => {
   const [error, setError] = useState(null);
+  const auth = useAuth();
   const handleSubmit = async (userInfo) => {
-    const result = await usrApi.register(userInfo);
+    const result = await usersApi.register(userInfo);
     if (!result.ok) {
       if (result.data) {
         setError(result.data.error)
@@ -34,6 +36,7 @@ const RegisterScreen = () => {
     <Screen>
       <Image style={styles.logo} source={require("../assets/logo-red.png")} />
 
+      <ErrorMessage error={error} visible={!!error} /> 
       <AppForm
         validationSchema={validationSchema}
         initialValues={{ email: "", password: "" }}
