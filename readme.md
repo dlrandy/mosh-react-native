@@ -34,3 +34,32 @@ expo push notification:
 2. store token on the server
 3. send a notification
 4. handle received notification
+
+AppIcon
+png
+1024 * 1024 （expo build service 自动生成其他的）
+follow applw/android guidelines
+sharp-cli -> npx expo-optimize
+js lib
+
+Error reporting tools
+sentry
+Bugsnag
+   report errors
+   attach diagnostic data
+   identify users
+   MOnitor releases
+
+If you want to automate your app deployment, consider FastLane:
+
+https://fastlane.tools/
+
+This blog posts shows how you can use Fastlane to deploy Expo apps:
+
+https://blog.expo.io/automating-standalone-expo-app-builds-and-deployments-with-fastlane-exp-and-exptool-9b2f5ad0a2cd
+
+
+
+
+
+

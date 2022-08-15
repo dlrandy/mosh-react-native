@@ -5,13 +5,14 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./app/assets/icon.png",
+    "privacy": "public",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./app/assets/splash.png",
       "resizeMode": "cover",
       "backgroundColor": "#e63c4b"
     },
-    "notification":{
+    "notification": {
       "iosDisplayInForeground": true
     },
     "updates": {
@@ -21,13 +22,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.randychen.donewithit",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./app/assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.randychen.donewithit"
     },
     "web": {
       "favicon": "./app/assets/favicon.png"
@@ -45,6 +49,19 @@
         }
       ]
     ],
-    "description": ""
+    "description": "",
+    "extra": {
+      "bugsnag": {
+        "apiKey": "d7592a073c12bf037a12c051ed209ab0"
+      }
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "@bugsnag/expo/hooks/post-publish.js",
+          "config": {}
+        }
+      ]
+    }
   }
 }

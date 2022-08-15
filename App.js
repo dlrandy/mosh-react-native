@@ -1,3 +1,4 @@
+
 import { useCallback, useRef } from 'react';
 import {
   StyleSheet,
@@ -24,7 +25,8 @@ import OfflineNotice from "./app/components/OfflineNotice/OfflineNotice";
 import AuthContext from "./app/auth/context";
 import authStorage from './app/auth/storage';
 import {navigationRef} from './app/navigation/rootNavigation';
-
+import logger from './app/utility/logger';
+logger.start();
 const categories = [
   { label: "Furniture", value: 1 },
   { label: "Clothing", value: 2 },
@@ -33,6 +35,7 @@ const categories = [
 
 SplashScreen.preventAutoHideAsync();
 export default function App() {
+
   const dimensions = Dimensions.get("screen");
   console.log(dimensions);
   console.log(useDimensions());

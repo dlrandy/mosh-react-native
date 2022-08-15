@@ -2,9 +2,10 @@
 import { create } from 'apisauce'
 import authStorage from '../auth/storage';
 import cache from '../utility/cache';
+import settings from '../config/settings';
 // define the api
 const apiClient = create({
-  baseURL: 'http://192.168.0.101:9000/api',
+  baseURL: settings.apiUrl,
 //   headers: { Accept: 'application/vnd.github.v3+json' },
 })
 
